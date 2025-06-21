@@ -1,0 +1,62 @@
+[
+    {
+        "nome": "Carne Moida",
+        "comprado": false
+    },
+    {
+        "nome": "Pão Integral",
+        "comprado": false
+    },
+    {
+        "nome": "Pão fit",
+        "comprado": false
+    },
+    {
+        "nome": "Peito de Frango",
+        "comprado": false
+    },
+    {
+        "nome": "Tomate",
+        "comprado": false
+    },
+    {
+        "nome": "Cenoura",
+        "comprado": false
+    },
+    {
+        "nome": "Maçã",
+        "comprado": false
+    },
+    {
+        "nome": "Laranja Bahia",
+        "comprado": false
+    },
+    {
+        "nome": "Iogurte Integral zero",
+        "comprado": false
+    },
+    {
+        "nome": "Chia",
+        "comprado": false
+    },
+    {
+        "nome": "Farinha de milho",
+        "comprado": false
+    },
+    {
+        "nome": "Muçarela light",
+        "comprado": false
+    },
+    {
+        "nome": "Parmesão",
+        "comprado": false
+    },
+    {
+        "nome": "filé de peixe",
+        "comprado": false
+    },
+    {
+        "nome": "abóbora",
+        "comprado": false
+    }
+]
