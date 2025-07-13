@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -92,32 +92,51 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
+        {% if not current_user.is_authenticated %}
+            <p><a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Registrar</a></p>
+        {% else %}
+            <p>Bem-vindo, {{ current_user.username }}! | <a href="{{ url_for('logout') }}">Sair</a></p>
+        {% endif %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
         <h1>Lista de Compras</h1>
 
-        <form action="{{ url_for('adicionar') }}" method="post">
-            <input type="text" name="nome_item" placeholder="Adicionar novo item..." required>
-            <button type="submit">Adicionar</button>
-        </form>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('adicionar') }}" method="post">
+                <input type="text" name="nome_item" placeholder="Adicionar novo item..." required>
+                <button type="submit">Adicionar</button>
+            </form>
 
-        <ul>
-            {% if lista %}
+            <ul>
                 {% for item in lista %}
-                    <li class="{{ 'comprado' if item.comprado else '' }}">
-                        <span>{{ item.nome }}</span>
+                    <li class="{{ 'comprado' if item.bought else '' }}">
+                        <span>{{ item.name }}</span>
                         <div class="item-actions">
-                            <a href="{{ url_for('marcar', item_id=loop.index0) }}" class="marcar-btn">
-                                {{ 'Desmarcar' if item.comprado else 'Marcar' }}
+                            <a href="{{ url_for('marcar', item_id=item.id) }}" class="marcar-btn">
+                                {{ 'Desmarcar' if item.bought else 'Marcar' }}
                             </a>
-                            <a href="{{ url_for('remover', item_id=loop.index0) }}" class="remover-btn">Remover</a>
+                            <a href="{{ url_for('remover', item_id=item.id) }}" class="remover-btn">Remover</a>
                         </div>
                     </li>
                 {% endfor %}
-            {% else %}
-                <li>Sua lista está vazia.</li>
-            {% endif %}
-        </ul>
+            </ul>
+        {% else %}
+            <p>Por favor, faça <a href="{{ url_for('login') }}">login</a> ou <a href="{{ url_for('register') }}">registre-se</a> para gerenciar sua lista.</p>
+        {% endif %}
+
     </div>
 </body>
 </html>
+
